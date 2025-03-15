@@ -19,7 +19,8 @@ const defaultIcon = new Icon({
 
 function ChangeView({ center }: { center: [number, number] }) {
   const map = useMap();
-  map.setView(center, 13);
+  const currentZoom = map.getZoom();
+  map.setView(center, currentZoom);
   return null;
 }
 
@@ -82,6 +83,8 @@ function App() {
         className="h-full w-full transition-all duration-300"
         zoomControl={false}
         attributionControl={false}
+        minZoom={1}
+        maxZoom={18}
       >
         <ChangeView center={center} />
         <MapClickHandler onLocationSelect={handleSelectLocation} />
